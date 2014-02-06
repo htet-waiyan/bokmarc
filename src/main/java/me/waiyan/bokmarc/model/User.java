@@ -29,6 +29,9 @@ public class User implements Serializable{
 	@Column(name="email")
 	private String email;
 	
+	@Column(name="userName")
+	private String userName;
+	
 	@Column(name="password")
 	private String password;
 	
@@ -53,6 +56,14 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -68,6 +79,8 @@ public class User implements Serializable{
 	public void setBookmarksList(List<Bookmark> bookmarksList) {
 		this.bookmarksList = bookmarksList;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

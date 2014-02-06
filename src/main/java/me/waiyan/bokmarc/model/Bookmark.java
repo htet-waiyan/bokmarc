@@ -1,6 +1,8 @@
 package me.waiyan.bokmarc.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -36,12 +40,20 @@ public class Bookmark {
 	private Date date;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@Column(name="categoryID")
+	@JoinColumn(name="categoryID")
 	private Category category;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@Column(name="userID")
+	@JoinColumn(name="userID")
 	private User user;
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+			name="BookmarkTagDetail",
+			joinColumns={@JoinColumn(name="bookmarkID")},
+			inverseJoinColumns={@JoinColumn(name="tagID")}
+	)
+	private List<Tag> tagList=new ArrayList<>();
 	
 	public Bookmark(){}
 
@@ -91,6 +103,14 @@ public class Bookmark {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public List<Tag> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<Tag> tagList) {
+		this.tagList = tagList;
 	}
 
 	@Override

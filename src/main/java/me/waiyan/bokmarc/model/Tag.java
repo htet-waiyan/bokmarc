@@ -1,12 +1,17 @@
 package me.waiyan.bokmarc.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +24,9 @@ public class Tag implements Serializable{
 	
 	@Column(name="description")
 	private String description;
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="tagList")
+	private List<Bookmark> bookmarksList=new ArrayList<>();
 	
 	public Tag(){}
 
@@ -36,6 +44,16 @@ public class Tag implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+
+	public List<Bookmark> getBookmarksList() {
+		return bookmarksList;
+	}
+
+	public void setBookmarksList(List<Bookmark> bookmarksList) {
+		this.bookmarksList = bookmarksList;
 	}
 
 	@Override

@@ -53,6 +53,8 @@ public class Category implements Serializable {
 	public void setBookmkarList(List<Bookmark> bookmkarList) {
 		this.bookmkarList = bookmkarList;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
