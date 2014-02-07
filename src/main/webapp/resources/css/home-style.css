@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+.content-wrapper{
+	margin-bottom:30px;
+}
+.content{
+	margin:3px;
+	border-radius:3px;
+	
+}
+.marketing{
+	padding:40px 20px 40px 40px;
+	color: #666;
+	background-color: #F4F4F4;
+}
+.marketing-image{
+	padding:5px 10px 5px 10px;
+}
+.social{
+	padding:30px 20px 30px 40px;
+	background-color: #F4F4F4;
+}

@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String home(){
+	public String index(){
 		System.out.println("Forwarding to home");
 		return "forward:/resources/index.html";
+	}
+	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String home(){
+		System.out.println("Forwarding to home");
+		return "forward:/resources/templates/home.html";
 	}
 }
