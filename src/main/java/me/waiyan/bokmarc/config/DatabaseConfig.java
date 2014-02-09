@@ -14,13 +14,15 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:jdbc.properties" })
 @ComponentScan({"me.waiyan.bokmarc.dao"})
-public class DatabaseConfig {
+public class DatabaseConfig{
 	
 	@Autowired
 	private Environment env;
@@ -57,6 +59,7 @@ public class DatabaseConfig {
 		return prop;
 	}
 	
+	@Bean
 	public HibernateTransactionManager getTransactionManager(){
 		HibernateTransactionManager txManager=new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory().getObject());
@@ -68,4 +71,5 @@ public class DatabaseConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslator(){
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+
 }

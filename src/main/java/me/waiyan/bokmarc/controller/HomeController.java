@@ -9,7 +9,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(){
-		System.out.println("Forwarding to home");
+		System.out.println("Forwarding to index");
 		return "forward:/resources/index.html";
 	}
 	

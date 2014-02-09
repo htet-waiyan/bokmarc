@@ -1,7 +1,22 @@
 @CHARSET "ISO-8859-1";
 
+.link{
+	color:#ffcc00;
+}
+.error{
+	margin-bottom:5px;
+	padding:5px;
+}
+.link:hover{
+	color:#f5bf55;
+	text-decoration: none;
+}
+.logo{
+	font-weight:bold;
+}
+
 .content-wrapper{
-	margin-bottom:30px;
+	margin-bottom:80px;
 }
 .content{
 	margin:3px;
@@ -19,4 +34,5 @@
 .social{
 	padding:30px 20px 30px 40px;
 	background-color: #F4F4F4;
+	color: #666;
 }
