@@ -1,26 +1,12 @@
-/**
- * 
- */
-
 var Bookmark=angular.module('Bookmark',['ngRoute']);
 
-/* Configuration for routing */
-Bookmark.config(function($routeProvider){
-	/* route for home */
+Bookmark.config(['$routeProvider',function($routeProvider){
+	/*
+	 * route to bookmarks/something,
+	 * REST style url
+	 * */
 	$routeProvider.when('/',{
-		controller:"HomeController",
-		templateUrl:"home"
+		controller:'BookmarkController',
+		templateUrl:'page/all'
 	})
-	
-	/* route for login */
-	.when('/login',{})
-	
-	/* route for register */
-	.when('/register',{
-		controller:"RegisterController",
-		templateUrl:"register"
-	})
-	
-	/* otherwise, route to error page */
-	.otherwise({});
-})
+}]);

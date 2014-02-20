@@ -1,0 +1,64 @@
+
+<div class="row">
+	<div class="col-md-4">
+		<input type="text" class="form-control" name="search"
+			placeholder="search by caption, tag, category" />
+	</div>
+	<div class="col-md-1">
+		<!-- tag -->
+		<button type="button" class="btn btn-default dropdown-toggle"
+			data-toggle="dropdown">
+			<span class="glyphicon glyphicon-tag"> Tag</span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#" class="move">Other</a></li>
+		</ul>
+	</div>
+	<div class="col-md-2">
+		<!-- category -->
+
+		<button type="button" class="btn btn-default dropdown-toggle"
+			data-toggle="dropdown">
+			<span class="glyphicon glyphicon-folder-close"> Category</span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#" class="move">Other</a></li>
+		</ul>
+	</div>
+	<div class="col-md-1">
+		<!-- add -->
+		<button class="btn btn-default btn-add" id="add">add</button>
+		<div class="add-form col-xs-12">
+			<form name="bookmakrForm" novalidate>
+				<div class="form-group">
+					<div id="success" ng-class="{'alert alert-success':type=='success','alert alert-danger':type=='error'}" ng-show="show">{{msg}}</div>
+					<span class="label label-danger error" ng-show="bookmakrForm.caption.$error.maxlength">Caption not more then 5</span>
+					<input type="text" ng-model="formData.caption" class="form-control"
+						name="caption" placeholder="caption" ng-maxlength="150"/>
+				</div>
+				<div class="form-group">
+					<span class="label label-danger error" ng-show="submitted && bookmakrForm.url.$error.required">Url is required!</span>
+					<span class="label label-danger error" ng-show="submitted && bookmakrForm.bookmarkUrl.$error.url">Invalid url</span>
+					<input type="url" ng-model="formData.bookmarkUrl" class="form-control"
+						name="bookmarkUrl" placeholder="url"  required/>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<input type="text" ng-model="formData.tags" class="form-control"
+							name="tag" placeholder="tags.." />
+					</div>
+					<div class="form-group col-xs-6">
+						<input type="text" ng-model="formData.category"
+							class="form-control" name="category" />
+					</div>
+				</div>
+				<div class="form-group">
+					<button ng-click="save()" class="form-group btn btn-primary">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">{{test.caption}}</div>
+</div>

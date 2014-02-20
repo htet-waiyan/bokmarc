@@ -1,6 +1,6 @@
 <div class="col-md-5 col-xs-12">
 <form name="registerForm" novalidate>
-	<div id="success" class="alert alert-success" ng-show="msg">{{msg}}</div>
+	<div id="success" ng-class="{'alert alert-success':type=='success','alert alert-danger':type=='error'}" ng-show="show">{{msg}}</div>
 	<div class="form-group">
 		<span class="label label-danger error" ng-show="submitted && registerForm.username.$error.required">Username is required!</span>
 		<input type="text" class="form-control" ng-model="formData.userName" name="username"
@@ -20,7 +20,7 @@
 			placeholder="password" required/>
 	</div>
 	<div class="form-group">
-		<button ng-click="submit()" ng-disabled="success" class="btn btn-small btn-primary">Register</button>
+		<button ng-click="submit()" class="btn btn-small btn-primary">Register</button>
 	</div>
 </form>
 </div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="Bookmark">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../resources/css/bookmark-style.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8">
+				<h3>Bookmark</h3>
+			</div>
+			<div class="col-xs-4">
+				<a href="logout">Logout</a>
+			</div>
+		</div>
+	</div>
+	<!-- where to place bookmakrs -->
+	<div class="container content" ng-view></div>
+
+	<script type="text/javascript"
+		src="../resources/js/vendor/angular.min.js"></script>
+	<script type="text/javascript"
+		src="../resources/js/vendor/angular-route.min.js"></script>
+	<script type="text/javascript" src="../resources/js/bookmark.js"></script>
+	<script type="text/javascript"
+		src="../resources/js/BookmarkController.js"></script>
+
+	<script type="text/javascript"
+		src="../resources/js/vendor/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"
+		src="../resources/js/vendor/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var state = false;
+			$(document).on('click','#add',function(){
+
+				if (!state) {
+					$('.add-form').show();
+					state = true;
+				} else {
+					$('.add-form').hide();
+					state = false;
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 
-Bookmark.factory("RegisterService",function($http){
+BookmarkHome.factory("RegisterService",function($http){
 	var Data={
 		submit:function(data,callback){
 			$http({
@@ -8,10 +8,11 @@ Bookmark.factory("RegisterService",function($http){
 				data:data
 			}).success(function(data,status){
 				//console.log(data.msgBody);
-				callback(data.msgBody);
+				callback(data.msgBody,'success');
 			}).error(function(data,status){
 				console.log(status+" data : "+data);
 				//return data;
+				callback(data.msgBody,'error');
 			});
 		}
 	}
@@ -19,7 +20,7 @@ Bookmark.factory("RegisterService",function($http){
 	return Data;
 });
 
-Bookmark.controller("RegisterController",function($scope,RegisterService){
+BookmarkHome.controller("RegisterController",function($scope,RegisterService){
 	$scope.formData={};
 	
 	$scope.submit=function(){
@@ -27,11 +28,12 @@ Bookmark.controller("RegisterController",function($scope,RegisterService){
 		
 		if($scope.registerForm.$valid){
 			
-			RegisterService.submit($scope.formData,function(data){
+			RegisterService.submit($scope.formData,function(data,type){
+				$scope.show=true;
+				$scope.type=type;
 				$scope.msg=data;
 				console.log("Data : "+$scope.msg);
-				
-				$scope.success=true;
+			
 			});
 		}
 	}

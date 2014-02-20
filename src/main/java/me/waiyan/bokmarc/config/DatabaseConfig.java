@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.hibernate3.HibernateExceptionTranslator;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -68,8 +69,8 @@ public class DatabaseConfig{
 	}
 	
 	@Bean
-	public PersistenceExceptionTranslationPostProcessor exceptionTranslator(){
-		return new PersistenceExceptionTranslationPostProcessor();
+	public HibernateExceptionTranslator exceptionTranslator(){
+		return new HibernateExceptionTranslator();
 	}
 
 }

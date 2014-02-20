@@ -1,0 +1,14 @@
+.add-form{
+	width:300px;
+	display:none;
+	position:absolute;
+	
+	padding:8px;
+	margin:8px;
+	
+	box-shadow:0px 0px 12px 0px #666;
+}
+.error{
+	margin-bottom:5px;
+	padding:5px;
+}
