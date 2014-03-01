@@ -5,16 +5,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import me.waiyan.bokmarc.model.Bookmark;
 import me.waiyan.bokmarc.model.Category;
 import me.waiyan.bokmarc.model.Tag;
+import me.waiyan.bokmarc.service.BookmarkService;
 
 @Component
 public class BookmarkBinder {
 
-	public Bookmark getNewBookmark(String caption, String link, Date date,
+	@Autowired
+	private BookmarkService bkService;
+	
+	public Bookmark getNewBookmark(String caption, String link, String date,
 			String category, String tag) {
 		Bookmark bookmark = new Bookmark();
 
@@ -29,10 +34,7 @@ public class BookmarkBinder {
 
 	private Category getNewCategory(String category) {
 		if(category!=null){
-			Category cat = new Category();
-			cat.setDescription(category);
-
-			return cat;
+			return bkService.getCategory(category);
 		}
 		else
 			return null;
@@ -44,11 +46,9 @@ public class BookmarkBinder {
 
 		if (tagStr != null) {
 			StringTokenizer tokenizer = new StringTokenizer(tagStr, ", ");
+			
 			while (tokenizer.hasMoreTokens()) {
-				tag = new Tag();
-				tag.setDescription(tokenizer.nextToken());
-
-				tagList.add(tag);
+				tagList.add(bkService.getTag(tokenizer.nextToken()));
 			}
 
 			return tagList;

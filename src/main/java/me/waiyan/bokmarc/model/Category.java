@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name="Category")
 public class Category implements Serializable {
@@ -25,7 +27,8 @@ public class Category implements Serializable {
 	@Column(name="description")
 	private String description;
 	
-	@OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="category", cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Bookmark> bookmkarList=new ArrayList<>();
 	
 	public Category(){}

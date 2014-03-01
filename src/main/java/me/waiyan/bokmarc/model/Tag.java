@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name="Tag")
 public class Tag implements Serializable{
@@ -26,6 +28,7 @@ public class Tag implements Serializable{
 	private String description;
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="tagList")
+	@JsonIgnore
 	private List<Bookmark> bookmarksList=new ArrayList<>();
 	
 	public Tag(){}

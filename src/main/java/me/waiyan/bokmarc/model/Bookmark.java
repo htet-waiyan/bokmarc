@@ -1,5 +1,6 @@
 package me.waiyan.bokmarc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +22,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="Bookmark")
-public class Bookmark {
+public class Bookmark implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="bookmarkID")
@@ -35,19 +39,21 @@ public class Bookmark {
 	@Column(name="url")
 	private String link;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name="date")
-	private Date date;
+	private String date;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinColumn(name="categoryID")
 	private Category category;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
 	@JoinColumn(name="userID")
+	@JsonIgnore
 	private User user;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinTable(
 			name="BookmarkTagDetail",
 			joinColumns={@JoinColumn(name="bookmarkID")},
@@ -81,11 +87,11 @@ public class Bookmark {
 		this.link = link;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

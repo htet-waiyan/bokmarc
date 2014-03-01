@@ -6,7 +6,7 @@ Bookmark.factory("BookmarkService",function($http){
 			method:'GET',
 			url:'api/'+param
 		}).success(function(data,status){
-			callback(data);
+			callback(data,'success');
 		}).error(function(data,status){
 			
 		})
@@ -37,14 +37,34 @@ Bookmark.factory("BookmarkService",function($http){
 			responseType:'json'
 		}).success(function(data,status,headers,config){
 			$('.add-form').hide();
-			console.log(data);
 			callback(data,'success');
 		}).error(function(data,status,headers,config){
-			console.log(status);
 			if(status==500)
 				callback('Server error! Try again later.','error');
 		});
 	};
+	
+	bookmarks.removeBookmark=function(id,callback){
+		var delParam={bookmarkID:id};
+		$http({
+			method:'GET',
+			url:'../bookmarks/delete',
+			params:delParam,
+			transformRequest:function(data){
+				if(data===undefined)
+					return data;
+				
+				return $.param(data);
+			},
+			responseType:'json'
+		}).success(function(data,status,headers,config){
+			callback(data,'success');
+		}).error(function(data,status,headers,config){
+			
+		})
+		
+		delParam=null;
+	}
 	
 	return bookmarks;
 });
@@ -52,9 +72,14 @@ Bookmark.factory("BookmarkService",function($http){
 Bookmark.controller("BookmarkController",function($scope,BookmarkService){
 	$scope.formData={};
 	
-	BookmarkService.retrieve('all',function(data){
-		$scope.bookmarks=data;
+	BookmarkService.retrieve('all',function(data,msg){
+		if(msg=='success')
+			$scope.bookmarks=data;
 	});
+	
+	$scope.test=function(obj){
+		console.log(obj.caption);
+	}
 	
 	$scope.save=function(){
 		$scope.submitted=true;
@@ -66,14 +91,26 @@ Bookmark.controller("BookmarkController",function($scope,BookmarkService){
 					$scope.show=true;
 					$scope.msg=data;
 					$scope.type=type;
+					
 				}
 				else{
 					console.log(data.caption);
+					$scope.submitted=false;
 				
-					$scope.test=data;
+					bind(data,function(){
+						$scope.formData=null;
+					});
 				}
 			});
 		}
+	}
+	
+	$scope.remove=function(id,index){
+		
+		BookmarkService.removeBookmark(id,function(data,type){
+			if(type=='success')
+				$scope.bookmarks.splice(index,1);
+		})
 	}
 	
 	var bind=function(newData,clear){

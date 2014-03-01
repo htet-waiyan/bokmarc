@@ -31,16 +31,22 @@
 		<div class="add-form col-xs-12">
 			<form name="bookmakrForm" novalidate>
 				<div class="form-group">
-					<div id="success" ng-class="{'alert alert-success':type=='success','alert alert-danger':type=='error'}" ng-show="show">{{msg}}</div>
-					<span class="label label-danger error" ng-show="bookmakrForm.caption.$error.maxlength">Caption not more then 5</span>
-					<input type="text" ng-model="formData.caption" class="form-control"
-						name="caption" placeholder="caption" ng-maxlength="150"/>
+					<div id="success"
+						ng-class="{'alert alert-success':type=='success','alert alert-danger':type=='error'}"
+						ng-show="show">{{msg}}</div>
+					<span class="label label-danger error"
+						ng-show="bookmakrForm.caption.$error.maxlength">Caption not
+						more then 5</span> <input type="text" ng-model="formData.caption"
+						class="form-control" name="caption" placeholder="caption"
+						ng-maxlength="150" />
 				</div>
 				<div class="form-group">
-					<span class="label label-danger error" ng-show="submitted && bookmakrForm.url.$error.required">Url is required!</span>
-					<span class="label label-danger error" ng-show="submitted && bookmakrForm.bookmarkUrl.$error.url">Invalid url</span>
-					<input type="url" ng-model="formData.bookmarkUrl" class="form-control"
-						name="bookmarkUrl" placeholder="url"  required/>
+					<span class="label label-danger error"
+						ng-show="submitted && bookmakrForm.url.$error.required">Url
+						is required!</span> <span class="label label-danger error"
+						ng-show="submitted && bookmakrForm.bookmarkUrl.$error.url">Invalid
+						url</span> <input type="url" ng-model="formData.bookmarkUrl"
+						class="form-control" name="bookmarkUrl" placeholder="url" required />
 				</div>
 				<div class="row">
 					<div class="form-group col-xs-6">
@@ -59,6 +65,41 @@
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-md-2">{{test.caption}}</div>
+<div class="row" ng-repeat="bookmark in bookmarks">
+	<div class="col-sm-1">
+		<!-- where thumbnail of a website -->
+	</div>
+	<div class="col-xs-7">
+		<div class="row">
+			<div class="col-md-12">
+				<a ng-href="{{bookmark.link}}">{{bookmark.caption ||
+					bookmark.link}}</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-2">
+				<a href="" ng-click="remove(bookmark.bookmarkID,$index)"> 
+					<span class="glyphicon glyphicon-trash"></span>
+				</a> 
+				<a href="" id="btnEdit"> 
+					<span class="glyphicon glyphicon-pencil"></span>
+					<div class="editPane">
+					</div>
+				</a> 
+				<a href="" id="btnView"> 
+					<span class="glyphicon glyphicon-bell"></span>
+					<div class="viewPane"></div>
+				</a>
+			</div>
+
+			<div class="col-sm-4"></div>
+
+			<div class="col-xs-1">Added</div>
+			<div class="col-xs-3">
+				<span>{{bookmark.date}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4"></div>
 </div>
